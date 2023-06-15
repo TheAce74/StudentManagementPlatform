@@ -2,10 +2,10 @@
 
 :root {
     @include dark {
-        --clr-text: var(--clr-dark-text);
-        --clr-background: var(--clr-dark-background);
-        --clr-primary: var(--clr-dark-primary);
-        --clr-secondary: var(--clr-dark-secondary);
-        --clr-accent: var(--clr-dark-accent);
+        --clr-text: var(--clr-dark-text) !important;
+        --clr-background: var(--clr-dark-background) !important;
+        --clr-primary: var(--clr-dark-primary) !important;
+        --clr-secondary: var(--clr-dark-secondary) !important;
+        --clr-accent: var(--clr-dark-accent) !important;
     }
 }
