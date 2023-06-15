@@ -3,3 +3,19 @@ $breakpoints: (
   "medium": 50em,
   "large": 75em,
 );
+
+$clr-light: (
+  "text": #0c0b1d,
+  "background": #fbfbfe,
+  "primary": #2a6a3f,
+  "secondary": #bbf6e8,
+  "accent": #235834,
+);
+
+$clr-dark: (
+  "text": #e2f6fd,
+  "background": #021d27,
+  "primary": #2a6a3f,
+  "secondary": #bac9f8,
+  "accent": #235834,
+);

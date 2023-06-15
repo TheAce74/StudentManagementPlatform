@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+:root {
+    @include dark {
+        --clr-text: var(--clr-dark-text);
+        --clr-background: var(--clr-dark-background);
+        --clr-primary: var(--clr-dark-primary);
+        --clr-secondary: var(--clr-dark-secondary);
+        --clr-accent: var(--clr-dark-accent);
+    }
+}

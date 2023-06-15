@@ -1,4 +1,6 @@
 //utility classes, sass placeholders and css custom properties
+@use "../abstracts" as *;
+
 %sr-only {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -7,4 +9,23 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+:root {
+  @each $key, $value in $clr-light {
+    --clr-light-#{$key}: #{$value};
+  }
+  @each $key, $value in $clr-dark {
+    --clr-dark-#{$key}: #{$value};
+  }
+
+  --ff-base: 'PT Sans', sans-serif;
+  --ff-headings: 'Nunito', sans-serif;
+
+  --fs-400: clamp(1.00rem, calc(0.93rem + 0.40vw), 1.25rem);
+  --fs-500: clamp(1.20rem, calc(1.09rem + 0.58vw), 1.56rem);
+  --fs-600: clamp(1.44rem, calc(1.29rem + 0.82vw), 1.95rem);
+  --fs-700: clamp(1.73rem, calc(1.51rem + 1.14vw), 2.44rem);
+  --fs-800: clamp(2.07rem, calc(1.78rem + 1.57vw), 3.05rem);
+  --fs-900: clamp(2.49rem, calc(2.09rem + 2.12vw), 3.82rem);
 }
