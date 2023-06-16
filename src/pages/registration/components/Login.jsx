@@ -1,10 +1,12 @@
 import { FaGraduationCap } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRef } from "react";
 import Swal from "sweetalert2";
 
 function Login() {
+  const navigate = useNavigate();
+
   const nameRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -41,7 +43,18 @@ function Login() {
             })
             .then((res) => {
               Swal.close();
-              console.log(res.data);
+              navigate("/dashboard", {
+                state: res.data,
+              });
+            })
+            .catch(() => {
+              Swal.fire({
+                title: "Error!",
+                text: "Can't login for some reason, please try again",
+                icon: "error",
+                confirmButtonText: "Retry",
+                confirmButtonColor: "red",
+              });
             });
         })
         .catch(() => {
