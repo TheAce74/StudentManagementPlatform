@@ -27,3 +27,10 @@
   --fs-800: clamp(2.07rem, calc(1.78rem + 1.57vw), 3.05rem);
   --fs-900: clamp(2.49rem, calc(2.09rem + 2.12vw), 3.82rem);
 }
+
+.flex {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5em;
+}
