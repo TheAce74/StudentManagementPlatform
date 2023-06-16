@@ -8,29 +8,19 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5 {
+h3 {
   font-family: var(--ff-headings);
   line-height: 1.2;
 }
 
 h1 {
-  font-size: var(--fs-900);
-}
-
-h2 {
-  font-size: var(--fs-800);
-}
-
-h3 {
   font-size: var(--fs-700);
 }
 
-h4 {
+h2 {
   font-size: var(--fs-600);
 }
 
-h5 {
+h3 {
   font-size: var(--fs-500);
 }

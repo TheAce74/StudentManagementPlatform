@@ -12,10 +12,11 @@
 }
 
 :root {
-  --clr-text: $clr-text;
-  --clr-background: $clr-background;
-  --clr-primary: $clr-primary;
-  --clr-accent: $clr-accent;
+  --clr-text: #{$clr-text};
+  --clr-background: #{$clr-background};
+  --clr-primary: #{$clr-primary};
+  --clr-accent: #{$clr-accent};
+  --clr-secondary: #{$clr-secondary};
 
   --ff-base: "PT Sans", sans-serif;
   --ff-headings: "Nunito", sans-serif;
@@ -24,8 +25,6 @@
   --fs-500: clamp(1.2rem, calc(1.09rem + 0.58vw), 1.56rem);
   --fs-600: clamp(1.44rem, calc(1.29rem + 0.82vw), 1.95rem);
   --fs-700: clamp(1.73rem, calc(1.51rem + 1.14vw), 2.44rem);
-  --fs-800: clamp(2.07rem, calc(1.78rem + 1.57vw), 3.05rem);
-  --fs-900: clamp(2.49rem, calc(2.09rem + 2.12vw), 3.82rem);
 }
 
 .flex {
@@ -33,4 +32,14 @@
   justify-content: start;
   align-items: center;
   gap: 0.5em;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
 }

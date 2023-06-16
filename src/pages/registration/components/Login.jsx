@@ -102,7 +102,7 @@ function Login() {
           {/* create verify account page */}
           First time here? <Link to="/">Verify your account</Link>
         </p>
-        <p className="login__attribution">Powered by Ulpha Deep Labs</p>
+        <p>Powered by Ulpha Deep Labs</p>
       </form>
     </section>
   );

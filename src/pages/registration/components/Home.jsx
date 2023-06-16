@@ -6,7 +6,7 @@ function Home() {
       <section className="home__hero">
         <h1>Welcome to the Student Management Platform!</h1>
         <p>
-          Access your results, messages, notifications, and customize your
+          Manage your results, messages, notifications, and customize your
           profile.
         </p>
         <Link to="login">Get Started</Link>
@@ -18,7 +18,6 @@ function Home() {
           Manage your results in real-time with ease and get visually stunning
           feedback
         </p>
-        {/* add an image here */}
       </section>
 
       <section className="home__profile">
@@ -27,7 +26,6 @@ function Home() {
           Easily customize your profile to suit your tastes. Personalized
           notifications and messages are an added bonus
         </p>
-        {/* add an image here */}
       </section>
 
       <section className="home__cta">

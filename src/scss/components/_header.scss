@@ -1,0 +1,16 @@
+@use "../base" as *;
+.header {
+  @extend .flex;
+  padding-block: 1em;
+  padding-left: 2em;
+  background-color: var(--clr-primary);
+  color: var(--clr-background);
+
+  &__logo {
+    width: 3em;
+  }
+
+  h2 {
+    font-size: var(--fs-500);
+  }
+}

@@ -6,7 +6,7 @@ function SharedRegistration() {
     <>
       <header className="header">
         <Link to="/" title="Go to home">
-          <img src={logo} alt="go to home" className="logo" />
+          <img src={logo} alt="go to home" className="header__logo" />
         </Link>
         <h2>Federal University of Technology Owerri</h2>
       </header>
