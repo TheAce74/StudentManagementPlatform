@@ -90,10 +90,11 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="dashboard__details">
         <h2>Your Details</h2>
         <div>
           <form onSubmit={handleUpload}>
+            <h3>Change profile image</h3>
             <input type="file" />
             <input type="submit" value="Upload Image" />
           </form>
