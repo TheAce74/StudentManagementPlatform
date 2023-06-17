@@ -14,7 +14,7 @@ function Dashboard() {
   );
 
   const { state } = useLocation();
-  
+
   useEffect(() => {
     if (!ignore) {
       axios.get("https://api.adviceslip.com/advice").then((res) => {
@@ -33,7 +33,7 @@ function Dashboard() {
 
   return (
     <section className="dashboard">
-      <div>
+      <div className="dashboard__profile">
         <div>
           <h1>
             Welcome back,{" "}
@@ -42,13 +42,17 @@ function Dashboard() {
 
           <p>{advice}</p>
         </div>
+        {/* this would be updated later */}
         {state.photo ? (
-          <img src={state.photo} alt="profile image" />
+          <img
+            src={`https://elinteerie1.pythonanywhere.com${state.photo}`}
+            alt="profile image"
+          />
         ) : (
           <FaUserGraduate />
         )}
       </div>
-      <div>
+      <div className="dashboard__widgets">
         <div>
           <div>
             <GiUpgrade />
@@ -80,7 +84,7 @@ function Dashboard() {
           <div>
             <MdCastForEducation />
             <p>
-              <span>Current GPA</span>
+              <span>GPA</span>
               <span>{state.gpa ? state.gpa : "N/A"}</span>
             </p>
           </div>
