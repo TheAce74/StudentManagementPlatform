@@ -12,7 +12,7 @@ function SharedDashboard() {
   return (
     <div className="dashboard-grid">
       <div>
-        <div>
+        <div className="dashboard-grid__logo">
           <img src={logo} alt="" />
           <h2>FUTO</h2>
         </div>
@@ -38,7 +38,7 @@ function SharedDashboard() {
             <span>Results</span>
           </Link>
         </div>
-        <Link to="/">
+        <Link to="/" className="logout">
           <FiLogOut />
           <span>Logout</span>
         </Link>

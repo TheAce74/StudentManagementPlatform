@@ -1,0 +1,55 @@
+@use "../base" as *;
+.dashboard-grid {
+  display: flex;
+  min-height: 100dvh;
+  gap: 1.5em;
+
+  & > div:first-child {
+    @extend .flex;
+    flex-direction: column;
+    gap: 3em;
+    align-items: start;
+    flex-basis: min(33%, 30ch);
+    background-color: var(--clr-primary);
+    color: var(--clr-background);
+    padding: 1em;
+  }
+
+  &__logo {
+    @extend .flex;
+    letter-spacing: 2px;
+
+    & img {
+      width: 3em;
+    }
+  }
+
+  &__logo + div {
+    width: 100%;
+
+    a {
+      @extend .flex;
+      @extend .link;
+      padding-block: 0.5em;
+      padding-left: 0.5em;
+      border-radius: 0.3em;
+
+      &:is(:hover, :focus-visible) {
+        background-color: var(--clr-accent);
+      }
+    }
+  }
+
+  .logout {
+    @extend .flex;
+    @extend .link;
+    width: 100%;
+    padding-block: 0.5em;
+    padding-left: 0.5em;
+    border-radius: 0.3em;
+
+    &:is(:hover, :focus-visible) {
+      background-color: var(--clr-accent);
+    }
+  }
+}
