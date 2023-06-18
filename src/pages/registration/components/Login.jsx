@@ -42,10 +42,30 @@ function Login() {
               },
             })
             .then((res) => {
-              Swal.close();
-              navigate("/dashboard", {
-                state: res.data,
-              });
+              axios
+                .get("https://elinteerie1.pythonanywhere.com/api/courses/", {
+                  headers: {
+                    Authorization: `Token ${res.data.key}`,
+                  },
+                })
+                .then((response) => {
+                  Swal.close();
+                  navigate("/dashboard", {
+                    state: {
+                      student: res.data,
+                      course: response.data,
+                    },
+                  });
+                })
+                .catch(() => {
+                  Swal.fire({
+                    title: "Error!",
+                    text: "Can't login for some reason, please try again",
+                    icon: "error",
+                    confirmButtonText: "Retry",
+                    confirmButtonColor: "red",
+                  });
+                });
             })
             .catch(() => {
               Swal.fire({
