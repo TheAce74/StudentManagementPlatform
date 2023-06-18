@@ -1,3 +1,4 @@
+@use "../abstracts" as *;
 *,
 *::before,
 *::after {
@@ -42,4 +43,10 @@ h6 {
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
+}
+
+html {
+  @include max(mini) {
+    font-size: 15px;
+  }
 }

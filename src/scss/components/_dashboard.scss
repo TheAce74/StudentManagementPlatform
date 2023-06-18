@@ -5,7 +5,26 @@
   min-height: 100dvh;
   gap: 1.5em;
 
-  & > div:first-child {
+  // menu btn stuff
+  .menu {
+    @extend .btn;
+    color: var(--clr-background);
+    background-color: var(--clr-primary);
+    font-size: 1.8rem;
+    position: fixed;
+    top: 0.5em;
+    left: 0.5em;
+    padding: 0.2em;
+    border-radius: 0.2em;
+    z-index: 2;
+    display: none;
+
+    &:is(:hover, :focus-visible) {
+      background-color: var(--clr-accent);
+    }
+  }
+
+  & > div:first-of-type {
     @extend .flex;
     flex-direction: column;
     gap: 3em;
@@ -14,14 +33,59 @@
     background-color: var(--clr-primary);
     color: var(--clr-background);
     padding: 1em;
+    position: sticky;
+    height: 100dvh;
+    top: 0;
+
+    @include max(medium) {
+      flex-basis: 5em;
+    }
+
+    @include max(mini) {
+      position: fixed;
+      left: 0;
+      width: 50%;
+      translate: -100% 0;
+      z-index: 1;
+      transition: translate 0.3s;
+      padding-top: 4em;
+
+      &.open {
+        translate: 0;
+      }
+    }
+
+    @include max(micro) {
+      width: 70%;
+    }
   }
 
   &__logo {
     @extend .flex;
     letter-spacing: 2px;
 
+    @include max(medium) {
+      @include min(mini--mod) {
+        margin-inline: auto;
+      }
+    }
+
     & img {
       width: 3em;
+    }
+
+    & h2 {
+      @include max(medium) {
+        @include min(mini) {
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+      }
     }
   }
 
@@ -38,13 +102,70 @@
       &:is(:hover, :focus-visible) {
         background-color: var(--clr-accent);
       }
+
+      svg {
+        @include max(medium) {
+          @include min(mini) {
+            font-size: 1.6rem;
+            margin-inline: auto;
+          }
+        }
+      }
+
+      span {
+        @include max(medium) {
+          @include min(mini) {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+          }
+        }
+      }
+
+      @include max(medium) {
+        @include min(mini) {
+          padding-left: 0;
+          margin-bottom: 0.4em;
+
+          &:is(:hover, :focus-visible)::after {
+            opacity: 1;
+            visibility: visible;
+          }
+
+          &::after {
+            content: attr(data-title);
+            background-color: var(--clr-accent);
+            border-radius: 0.3em;
+            position: absolute;
+            padding: 0.4em 0.5em;
+            right: 0;
+            translate: calc(100% + 0.1em) 0;
+            white-space: nowrap;
+            opacity: 0;
+            z-index: 1;
+            visibility: hidden;
+          }
+        }
+      }
     }
   }
 
   & > section {
     padding-block: 1.5em;
-    padding-right: 1.5em;
     flex-basis: min(67%, 100% - (30ch + 3em));
+
+    @include max(medium) {
+      flex-basis: calc(100% - 8em);
+    }
+
+    @include max(mini) {
+      flex-basis: 90%;
+      margin-inline: auto;
+    }
   }
 
   .logout {
@@ -57,6 +178,61 @@
 
     &:is(:hover, :focus-visible) {
       background-color: var(--clr-accent);
+    }
+
+    span {
+      @include max(medium) {
+        @include min(mini) {
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+      }
+    }
+
+    svg {
+      @include max(medium) {
+        @include min(mini) {
+          font-size: 1.6rem;
+          margin-inline: auto;
+        }
+      }
+    }
+
+    @include max(medium) {
+      @include min(mini) {
+        padding-left: 0;
+
+        &:is(:hover, :focus-visible)::after {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        &::after {
+          content: attr(data-title);
+          background-color: var(--clr-accent);
+          border-radius: 0.3em;
+          position: absolute;
+          padding: 0.4em 0.5em;
+          right: 0;
+          translate: calc(100% + 0.1em) 0;
+          white-space: nowrap;
+          opacity: 0;
+          z-index: 1;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  //menu btn stuff
+  @include max(mini) {
+    & > .menu {
+      display: block;
     }
   }
 }
@@ -81,6 +257,11 @@
       padding: 0.05em;
       border-radius: 50%;
       border: 2px solid var(--clr-primary);
+    }
+
+    @include max(mini) {
+      flex-direction: column-reverse;
+      text-align: center;
     }
   }
 
@@ -154,7 +335,19 @@
 
       table {
         text-align: left;
-        width: 80%;
+        width: max(80%, 35ch);
+      }
+
+      @include max(special) {
+        display: block;
+
+        input:last-of-type {
+          margin-bottom: 1.5em;
+        }
+
+        table {
+          width: 90%;
+        }
       }
     }
   }

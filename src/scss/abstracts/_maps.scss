@@ -1,5 +1,10 @@
+@use "functions";
 $breakpoints: (
+  "micro": functions.em(280),
+  "mini--mod": 34.99em,
+  "mini": 35em,
   "small": 44em,
   "medium": 50em,
+  "special": 64em,
   "large": 75em,
 );
