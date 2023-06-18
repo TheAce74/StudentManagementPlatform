@@ -121,6 +121,9 @@ function Results() {
           </tr>
         </tbody>
       </table>
+      <p>
+        CGPA: <span></span>
+      </p>
     </section>
   );
 }
