@@ -1,8 +1,28 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Results() {
-  const { state } = useLocation();
-  console.log(state);
+  // const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const key = sessionStorage.getItem("key");
+
+  if (!key) {
+    navigate("/login");
+  }
+
+  axios
+    .get("https://elinteerie1.pythonanywhere.com/api/courses/", {
+      headers: {
+        Authorization: `Token ${key}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch(() => {});
+
   return (
     <section className="results">
       <h1>Results</h1>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaUserGraduate, FaGraduationCap, FaSchool } from "react-icons/fa";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -14,6 +14,14 @@ function Dashboard() {
   );
 
   const { state } = useLocation();
+
+  const navigate = useNavigate();
+
+  const key = sessionStorage.getItem("key");
+
+  if (!key) {
+    navigate("/login");
+  }
 
   useEffect(() => {
     if (!ignore) {
@@ -103,28 +111,28 @@ function Dashboard() {
               <tr>
                 <th>Name:</th>
                 <td>
-                  {state.user.first_name && state.user.last_name
+                  {state.user?.first_name && state.user?.last_name
                     ? `${state.user.first_name} ${state.user.last_name}`
                     : "User"}
                 </td>
               </tr>
               <tr>
                 <th>Gender:</th>
-                <td>{state.user.gender ? state.user.gender : "N/A"}</td>
+                <td>{state.user?.gender ? state.user.gender : "N/A"}</td>
               </tr>
               <tr>
                 <th>Maiden Name:</th>
                 <td>
-                  {state.user.maiden_name ? state.user.maiden_name : "N/A"}
+                  {state.user?.maiden_name ? state.user.maiden_name : "N/A"}
                 </td>
               </tr>
               <tr>
                 <th>Date of Birth:</th>
-                <td>{state.user.dob ? state.user.dob : "N/A"}</td>
+                <td>{state.date_of_birth ? state.date_of_birth : "N/A"}</td>
               </tr>
               <tr>
                 <th>Email:</th>
-                <td>{state.user.email ? state.user.email : "N/A"}</td>
+                <td>{state.user?.email ? state.user.email : "N/A"}</td>
               </tr>
               <tr>
                 <th>Faculty:</th>

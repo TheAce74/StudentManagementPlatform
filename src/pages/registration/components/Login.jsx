@@ -35,6 +35,8 @@ function Login() {
           nameRef.current.value = "";
           passwordRef.current.value = "";
 
+          sessionStorage.setItem("key", res.data.key);
+
           axios
             .get("https://elinteerie1.pythonanywhere.com/api/student/", {
               headers: {
@@ -42,30 +44,10 @@ function Login() {
               },
             })
             .then((res) => {
-              axios
-                .get("https://elinteerie1.pythonanywhere.com/api/courses/", {
-                  headers: {
-                    Authorization: `Token ${res.data.key}`,
-                  },
-                })
-                .then((response) => {
-                  Swal.close();
-                  navigate("/dashboard", {
-                    state: {
-                      student: res.data,
-                      course: response.data,
-                    },
-                  });
-                })
-                .catch(() => {
-                  Swal.fire({
-                    title: "Error!",
-                    text: "Can't login for some reason, please try again",
-                    icon: "error",
-                    confirmButtonText: "Retry",
-                    confirmButtonColor: "red",
-                  });
-                });
+              Swal.close();
+              navigate("/dashboard", {
+                state: res.data,
+              });
             })
             .catch(() => {
               Swal.fire({

@@ -74,5 +74,9 @@
     &:is(:hover, :focus-visible) {
       background-color: var(--clr-accent);
     }
+
+    &:active {
+      scale: 0.9;
+    }
   }
 }

@@ -18,6 +18,10 @@ function SharedDashboard() {
     setOpen(!open);
   };
 
+  const handleLogOut = () => {
+    sessionStorage.removeItem("key");
+  };
+
   return (
     <div className="dashboard-grid">
       <button className="menu" onClick={handleOpen}>
@@ -54,7 +58,12 @@ function SharedDashboard() {
             <span>Results</span>
           </Link>
         </div>
-        <Link to="/" className="logout" data-title="Logout">
+        <Link
+          to="/"
+          className="logout"
+          data-title="Logout"
+          onClick={handleLogOut}
+        >
           <FiLogOut />
           <span>Logout</span>
         </Link>
