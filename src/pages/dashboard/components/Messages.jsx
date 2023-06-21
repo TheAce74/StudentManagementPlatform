@@ -1,5 +1,6 @@
 // import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Messages() {
   // const { state } = useLocation();
@@ -8,9 +9,11 @@ function Messages() {
 
   const key = sessionStorage.getItem("key");
 
-  if (!key) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!key) {
+      navigate("/login");
+    }
+  }, [key, navigate]);
 
   return (
     <section className="messages">

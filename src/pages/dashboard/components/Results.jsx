@@ -1,6 +1,7 @@
 // import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
 
 function Results() {
   // const { state } = useLocation();
@@ -8,9 +9,11 @@ function Results() {
 
   const key = sessionStorage.getItem("key");
 
-  if (!key) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!key) {
+      navigate("/login");
+    }
+  }, [key, navigate]);
 
   axios
     .get("https://elinteerie1.pythonanywhere.com/api/courses/", {

@@ -19,11 +19,11 @@ function Dashboard() {
 
   const key = sessionStorage.getItem("key");
 
-  if (!key) {
-    navigate("/login");
-  }
-
   useEffect(() => {
+    if (!key) {
+      navigate("/login");
+    }
+
     if (!ignore) {
       axios.get("https://api.adviceslip.com/advice").then((res) => {
         setAdvice(res.data.slip.advice);
@@ -32,7 +32,7 @@ function Dashboard() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [key, navigate]);
 
   const handleUpload = (e) => {
     e.preventDefault();

@@ -1,16 +1,19 @@
 // import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Profile() {
   // const { state } = useLocation();
 
   const navigate = useNavigate();
 
-  const key = sessionStorage.getItem("key");
+ const key = sessionStorage.getItem("key");
 
-  if (!key) {
-    navigate("/login");
-  }
+ useEffect(() => {
+   if (!key) {
+     navigate("/login");
+   }
+ }, [key, navigate]);
 
   return (
     <section className="profile">
