@@ -124,7 +124,7 @@ function Results() {
           {response ? (
             <tr>
               <td colSpan="2" className="bold">
-                Units/GPA/TGP
+                Total Units/GPA/TGP
               </td>
               <td>{response.data.student_grade.total_course_units}</td>
               <td>
