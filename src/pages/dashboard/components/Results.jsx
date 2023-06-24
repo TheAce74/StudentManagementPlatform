@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 function Results() {
@@ -13,7 +13,7 @@ function Results() {
     semester: "Select Semester",
   });
 
-  const responseRef = useRef(null);
+  const [response, setResponse] = useState(null);
 
   const key = sessionStorage.getItem("key");
 
@@ -30,7 +30,7 @@ function Results() {
       },
     })
     .then((res) => {
-      responseRef.current = res;
+      setResponse(res);
     })
     .catch(() => {
       Swal.fire({
@@ -110,8 +110,8 @@ function Results() {
           </tr>
         </thead>
         <tbody>
-          {responseRef.current
-            ? responseRef.current.data.course_items.map((item, index) => (
+          {response
+            ? response.data.course_items.map((item, index) => (
                 <tr key={index}>
                   <td>{item.course}</td>
                   <td>{item.course_code ? item.course_code : "N/A"}</td>
@@ -121,22 +121,18 @@ function Results() {
                 </tr>
               ))
             : ""}
-          {responseRef.current ? (
+          {response ? (
             <tr>
               <td colSpan="2" className="bold">
                 Units/GPA/TGP
               </td>
+              <td>{response.data.student_grade.total_course_units}</td>
               <td>
-                {responseRef.current.data.student_grade.total_course_units}
-              </td>
-              <td>
-                {responseRef.current.data.student_grade.gpa
-                  ? responseRef.current.data.student_grade.gpa
+                {response.data.student_grade.gpa
+                  ? response.data.student_grade.gpa
                   : "N/A"}
               </td>
-              <td>
-                {responseRef.current.data.student_grade.total_grade_point}
-              </td>
+              <td>{response.data.student_grade.total_grade_point}</td>
             </tr>
           ) : (
             <tr>
@@ -147,12 +143,12 @@ function Results() {
           )}
         </tbody>
       </table>
-      {responseRef.current ? (
+      {response ? (
         <p className="cgpa">
           <span>CGPA: </span>
           <span>
-            {responseRef.current.data.student_grade.cgpa
-              ? responseRef.current.data.student_grade.cgpa
+            {response.data.student_grade.cgpa
+              ? response.data.student_grade.cgpa
               : "N/A"}
           </span>
         </p>
