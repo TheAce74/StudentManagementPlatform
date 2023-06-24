@@ -1,0 +1,56 @@
+@use "../base" as *;
+
+.results {
+  form {
+    @extend .flex;
+    margin-block: 0.5em 1em;
+    align-items: stretch;
+    gap: 1em;
+
+    & * {
+      border-radius: 0.3em;
+    }
+
+    button {
+      @extend .btn;
+      padding: 0.1em 1em;
+      background-color: var(--clr-primary);
+      color: var(--clr-background);
+
+      &:is(:hover, :focus-visible) {
+        background-color: var(--clr-accent);
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+    border: 2px solid var(--clr-primary);
+    overflow: scroll;
+    border-collapse: collapse;
+
+    & * {
+      padding: 0.1em;
+      padding-left: 0.5em;
+      border: 2px solid var(--clr-primary);
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+  }
+
+  .cgpa {
+    margin-top: 1em;
+
+    span:first-child {
+      color: var(--clr-primary);
+      font-weight: bold;
+    }
+  }
+
+  .splash {
+    text-align: center;
+  }
+}

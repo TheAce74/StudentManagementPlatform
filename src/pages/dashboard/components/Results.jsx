@@ -1,11 +1,19 @@
-// import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 function Results() {
-  // const { state } = useLocation();
+  const { state } = useLocation();
+
   const navigate = useNavigate();
+
+  const [resultState, setResultState] = useState({
+    level: "Select Level",
+    semester: "Select Semester",
+  });
+
+  const responseRef = useRef(null);
 
   const key = sessionStorage.getItem("key");
 
@@ -22,27 +30,67 @@ function Results() {
       },
     })
     .then((res) => {
-      console.log(res);
+      responseRef.current = res;
     })
-    .catch(() => {});
+    .catch(() => {
+      Swal.fire({
+        title: "Error!",
+        text: "Can't fetch info",
+        icon: "error",
+        showCancelButton: false,
+        showConfirmButton: false,
+      });
+      navigate("/dashboard");
+    });
+
+  const handleChangeLevel = (e) => {
+    setResultState({ ...resultState, level: e.target.value });
+  };
+
+  const handleChangeSemester = (e) => {
+    setResultState({ ...resultState, semester: e.target.value });
+  };
+
+  const getLevels = (val) => {
+    const levelArr = [];
+    const defaultLevel = 100;
+    while (val >= defaultLevel) {
+      levelArr.push(val);
+      val -= 100;
+    }
+    return levelArr.reverse().map((item) => (
+      <option value={item} key={item}>
+        {item}
+      </option>
+    ));
+  };
+
+  const getGrade = (num) => {
+    const arr = ["A", "B", "C", "D", "E", "F"];
+    return arr.reverse()[num];
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // add submit logic later
+  };
 
   return (
     <section className="results">
       <h1>Results</h1>
 
-      <form>
-        <select value="Select Level">
+      <form onSubmit={handleSubmit}>
+        <select value={resultState.level} onChange={handleChangeLevel} required>
           <option value="Select Level" disabled>
             Select Level
           </option>
-          <option value="100L">100L</option>
-          <option value="200L">200L</option>
-          <option value="300L">300L</option>
-          <option value="400L">400L</option>
-          <option value="500L">500L</option>
-          <option value="600L">600L</option>
+          {getLevels(state.level)}
         </select>
-        <select value="Select Semester">
+        <select
+          value={resultState.semester}
+          onChange={handleChangeSemester}
+          required
+        >
           <option value="Select Semester" disabled>
             Select Semester
           </option>
@@ -51,11 +99,9 @@ function Results() {
         </select>
         <button role="submit">View</button>
       </form>
-      {/* make this table dynamic */}
       <table>
         <thead>
           <tr>
-            <th>S/N</th>
             <th>Course title</th>
             <th>Course code</th>
             <th>Unit(s)</th>
@@ -64,89 +110,55 @@ function Results() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>Elementary Mathematics</td>
-            <td>MTH 101</td>
-            <td>4</td>
-            <td>A</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td colSpan="3">TGP/GPA</td>
-            <td>36</td>
-            <td>5.00</td>
-            <td></td>
-          </tr>
+          {responseRef.current
+            ? responseRef.current.data.course_items.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.course}</td>
+                  <td>{item.course_code ? item.course_code : "N/A"}</td>
+                  <td>{item.units ? item.units : "N/A"}</td>
+                  <td>{getGrade(item.grade_point)}</td>
+                  <td>{item.units ? item.units * item.grade_point : "N/A"}</td>
+                </tr>
+              ))
+            : ""}
+          {responseRef.current ? (
+            <tr>
+              <td colSpan="2" className="bold">
+                Units/GPA/TGP
+              </td>
+              <td>
+                {responseRef.current.data.student_grade.total_course_units}
+              </td>
+              <td>
+                {responseRef.current.data.student_grade.gpa
+                  ? responseRef.current.data.student_grade.gpa
+                  : "N/A"}
+              </td>
+              <td>
+                {responseRef.current.data.student_grade.total_grade_point}
+              </td>
+            </tr>
+          ) : (
+            <tr>
+              <td className="splash" colSpan="5">
+                No courses added
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-      <p>
-        CGPA: <span></span>
-      </p>
+      {responseRef.current ? (
+        <p className="cgpa">
+          <span>CGPA: </span>
+          <span>
+            {responseRef.current.data.student_grade.cgpa
+              ? responseRef.current.data.student_grade.cgpa
+              : "N/A"}
+          </span>
+        </p>
+      ) : (
+        ""
+      )}
     </section>
   );
 }
