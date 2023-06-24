@@ -35,12 +35,11 @@ function Results() {
     .catch(() => {
       Swal.fire({
         title: "Error!",
-        text: "Can't fetch info",
+        text: "Can't fetch results info",
         icon: "error",
         showCancelButton: false,
         showConfirmButton: false,
       });
-      navigate("/dashboard");
     });
 
   const handleChangeLevel = (e) => {
